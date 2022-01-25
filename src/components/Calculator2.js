@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { formatMoney } from '../utils/formatMoney';
+import axios from 'axios';
+// import { formatMoney } from '../utils/formatMoney';
 import formatDate from '../utils/formatDate';
 
 const Calculator2 = () => {
@@ -12,12 +13,41 @@ const Calculator2 = () => {
     'JPY',
     'CNY',
   ]);
+  const [isActive, setIsActive] = useState(false);
+  const [currency, setCurrency] = useState([]);
+  const [date, setDate] = useState();
+  const [index, setIndex] = useState(0);
+
   const totalItems = ['USD', 'CAD', 'KRW', 'HKD', 'JPY', 'CNY'];
   const updateSelect = (event) => {
     setSelect(event.target.innerText);
     setDropdownItems(totalItems.filter((e) => e !== event.target.innerText));
   };
-  const [isActive, setIsActive] = useState(false);
+
+  const getData = async () => {
+    try {
+      const { data } = await axios.get(
+        `http://api.currencylayer.com/live?access_key=dd061ec34800c51169bb23adb343f890&source=${select}&currencies=${dropdownItems.join(
+          ',',
+        )}`,
+      );
+
+      console.log(data);
+      console.log(data.timestamp);
+      console.log(Object.values(data.quotes));
+
+      setCurrency(Object.values(data.quotes));
+      setDate(data.timestamp);
+
+      console.log(currency);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Container>
@@ -38,13 +68,13 @@ const Calculator2 = () => {
             setIsActive(!isActive);
           }}
         >
-          {dropdownItems.map((item) => {
-            return <li>{item}</li>;
+          {dropdownItems.map((item, idx) => {
+            return <button onClick={() => setIndex(idx)}>{item}</button>;
           })}
         </Tab>
         <Result>
-          <Money>{formatMoney('1000000')}</Money>
-          <Date>{formatDate()}</Date>
+          <Money>{currency[index]}</Money>
+          <Date>{formatDate(date * 1000)}</Date>
         </Result>
       </Content>
     </Container>
