@@ -42,9 +42,9 @@ const Calculator2 = () => {
   const getApi = async () => {
     try {
       const { data } = await axios.get(
-        `https://api.currencylayer.com/live?access_key=dd061ec34800c51169bb23adb343f890&currencies=${dropdownItems.join(
-          ',',
-        )}`,
+        `http://api.currencylayer.com/live?access_key=${
+          process.env.REACT_APP_API_KEY
+        }&currencies=${dropdownItems.join(',')}`,
       );
       const currencyBase = [1, ...Object.values(data.quotes)];
       const currencyList = {};
