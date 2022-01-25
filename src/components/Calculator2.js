@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-import { formatMoney, roundToTwo } from '../utils/formatMoney';
+import {
+  addCommaWithSeparator,
+  addCommaToMoney,
+  roundToTwo,
+  priceToNumber,
+} from '../utils/formatMoney';
 import formatDate from '../utils/formatDate';
 import Grid from '../common/Grid';
 
@@ -16,15 +21,16 @@ const Calculator2 = () => {
   ]);
   const [currency, setCurrency] = useState([]);
   const [date, setDate] = useState();
-  const [tapIndex, setTapIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState(0);
   const [inputPrice, setInputPrice] = useState(0);
+  const inputRef = useRef(null);
 
   const totalItems = ['USD', 'CAD', 'KRW', 'HKD', 'JPY', 'CNY'];
 
-  const handleInput = (event) => {
-    setInputPrice(event.target.value);
+  const updateInputValue = () => {
+    inputRef.current.value = addCommaToMoney(inputRef.current.value);
+    setInputPrice(inputRef.current.value);
   };
-
   const updateSelect = (event) => {
     setSelect(event.target.innerText);
     setDropdownItems(totalItems.filter((e) => e !== event.target.innerText));
@@ -50,6 +56,7 @@ const Calculator2 = () => {
       });
       setCurrency(currencyList);
       setDate(data.timestamp);
+      console.log(currencyList);
     } catch (err) {
       console.log(err);
     }
@@ -69,10 +76,10 @@ const Calculator2 = () => {
         padding="20px 0"
       >
         <Input
-          type="number"
-          onChange={handleInput}
-          onKeyUp={formatMoney(inputPrice)}
+          type="text"
+          onChange={updateInputValue}
           placeholder="0"
+          ref={inputRef}
         />
         <Dropdown>
           {select}
@@ -91,7 +98,7 @@ const Calculator2 = () => {
         <Tab>
           {dropdownItems.map((item, idx) => {
             return (
-              <button key={idx} onClick={() => setTapIndex(idx)}>
+              <button key={idx} onClick={() => setTabIndex(idx)}>
                 {item}
               </button>
             );
@@ -100,7 +107,11 @@ const Calculator2 = () => {
         <Grid isFlex column justify="center" align="center" bg="transparent">
           <Money>
             {inputPrice !== 0
-              ? formatMoney(roundToTwo(inputPrice * currency[select][tapIndex]))
+              ? addCommaWithSeparator(
+                  roundToTwo(
+                    priceToNumber(inputPrice) * currency[select][tabIndex],
+                  ),
+                )
               : 0}
           </Money>
           <Date>{formatDate(date * 1000)}</Date>
@@ -151,15 +162,6 @@ const Dropdown = styled.div`
   }
 `;
 
-const Content = styled.div`
-  background: lightyellow;
-  width: 100%;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
 const Tab = styled.ul`
   height: 80px;
   display: flex;
@@ -173,11 +175,6 @@ const Tab = styled.ul`
     width: 80px;
     padding: 16px 0;
   }
-`;
-
-const Result = styled.div`
-  height: 400px;
-  padding: 40px;
 `;
 
 const Money = styled.p`
