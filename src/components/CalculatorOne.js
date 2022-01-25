@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 import Grid from '../common/Grid';
 import { addCommaWithSeparator, roundToTwo } from '../utils/formatMoney';
@@ -60,7 +61,14 @@ const CalculatorOne = () => {
   };
 
   return (
-    <Grid onSubmit={handleButton} height="560px">
+    <Grid
+      onSubmit={handleButton}
+      height="560px"
+      checkComponent="one"
+      width="300px"
+      padding="30px 30px"
+      radius="24px"
+    >
       <div>
         <h2>환율계산</h2>
         송금국가: 미국(USD)
@@ -78,19 +86,15 @@ const CalculatorOne = () => {
         </div>
         <div>
           <span>송금액: </span>
-          <input type="text" />
+          <Input type="text" />
           <span> USD</span>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <button
-            style={{ width: '150px', marginBottom: '20px', marginTop: '10px' }}
-          >
-            submit
-          </button>
-        </div>
+        <Button>submit</Button>
         {active &&
           (!inputValue || Number(receiveable) <= 0 || inputValue >= 10000 ? (
-            <span style={{ color: 'red' }}>송금액이 바르지 않습니다</span>
+            <div>
+              <span style={{ color: 'red' }}>송금액이 바르지 않습니다</span>
+            </div>
           ) : (
             <div>{`수취금액은 ${receiveable} ${receiptCountry} 입니다.`}</div>
           ))}
@@ -98,5 +102,23 @@ const CalculatorOne = () => {
     </Grid>
   );
 };
+
+const Input = styled.input`
+  background-color: #ffffff;
+  :focus {
+    border: 1px solid black;
+  }
+`;
+
+const Button = styled.button`
+  width: 150px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  background-color: #ffffff;
+  :hover {
+    opacity: 0.7;
+  }
+  border-radius: 5px;
+`;
 
 export default CalculatorOne;
