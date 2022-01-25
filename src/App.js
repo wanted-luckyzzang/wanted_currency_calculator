@@ -1,13 +1,10 @@
 import React from 'react';
 import './App.css';
-import Test from './utils/Test';
+import Calculator2 from './components/Calculator2';
+// import Test from './utils/Test';
 
 function App() {
-  return (
-    <div className="App">
-      <Test />
-    </div>
-  );
+  return <Calculator2 />;
 }
 
 export default App;
