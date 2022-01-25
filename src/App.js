@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.css';
+import './reset.css';
 import Calculator2 from './components/Calculator2';
 // import Test from './utils/Test';
 
