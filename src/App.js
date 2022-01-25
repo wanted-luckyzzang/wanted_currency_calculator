@@ -3,7 +3,7 @@ import React from 'react';
 import './App.css';
 
 function App() {
-  return <div className="App">와우</div>;
+  return <div className="App">와우!!!!</div>;
 }
 
 export default App;
