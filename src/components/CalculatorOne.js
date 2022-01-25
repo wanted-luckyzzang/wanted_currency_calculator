@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Grid from '../common/Grid';
-import { formatMoney, roundToTwo } from '../utils/formatMoney';
+import { addCommaWithSeparator, roundToTwo } from '../utils/formatMoney';
 
 const CalculatorOne = () => {
   const [currency, setCurrency] = useState('');
@@ -9,7 +9,7 @@ const CalculatorOne = () => {
   const [active, setActive] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
-  const receiveable = formatMoney(
+  const receiveable = addCommaWithSeparator(
     roundToTwo(
       Number(inputValue) *
         Number(currency.includes(',') ? currency.replace(',', '') : currency),
@@ -30,7 +30,7 @@ const CalculatorOne = () => {
       const getData = JSON.parse(localStorage.getItem('currency'))[0];
       for (const index in getData) {
         if (index.slice(3) === 'KRW') {
-          setCurrency(formatMoney(roundToTwo(getData[index])));
+          setCurrency(addCommaWithSeparator(roundToTwo(getData[index])));
         }
       }
     } catch (err) {
@@ -45,7 +45,7 @@ const CalculatorOne = () => {
       console.log(getData);
       for (const value in getData) {
         if (value.slice(3) === event.target.value) {
-          setCurrency(formatMoney(roundToTwo(getData[value])));
+          setCurrency(addCommaWithSeparator(roundToTwo(getData[value])));
         }
       }
     } catch (err) {
@@ -60,7 +60,7 @@ const CalculatorOne = () => {
   };
 
   return (
-    <Grid onSubmit={handleButton}>
+    <Grid onSubmit={handleButton} height="560px">
       <div>
         <h2>환율계산</h2>
         송금국가: 미국(USD)

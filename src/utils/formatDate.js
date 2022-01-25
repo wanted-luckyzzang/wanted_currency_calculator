@@ -1,4 +1,4 @@
-const formatDate = () => {
+const formatDate = (timestamp) => {
   const monthArr = [
     'Jan',
     'Feb',
@@ -14,7 +14,7 @@ const formatDate = () => {
     'Dec',
   ];
 
-  const today = new Date();
+  const today = new Date(timestamp);
 
   const year = today.getFullYear();
   const month = monthArr[today.getMonth()]; // 1월은 0으로 표현됨 (0~11)

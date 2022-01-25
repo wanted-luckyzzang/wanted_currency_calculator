@@ -46,7 +46,9 @@
       "react/prop-types": 0,
       "react/react-in-jsx-scope": 0,
       "guard-for-in": 0,
-      "no-restricted-syntax": 0
+      "no-restricted-syntax": 0,
+      "react/jsx-props-no-spreading": 0,
+      "react/no-array-index-key": 0
     }
   },
   "browserslist": {
