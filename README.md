@@ -33,8 +33,7 @@ npm run start
 ```
 
 ## ✨ 구현 영상
-![gif2](https://user-images.githubusercontent.com/49055628/151072806-89c33913-f1ea-4f20-82f0-43dba0a4113e.gif)
-
+![gif1](https://user-images.githubusercontent.com/49055628/151074600-1af3d362-8d29-4d8c-b0f2-56f534fe44ae.gif)
 
 ### ✅ 과제에 제시된 요구사항 모두 구현
 * 환율 계산 및 결과 렌더링
