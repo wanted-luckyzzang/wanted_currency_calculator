@@ -31,7 +31,12 @@ npm run start
 ## 🚀 과제질문 3가지 답변
 
 1. 프로젝트의 폴더 구조와 해당 구조의 장단점
-- 
+<img src="https://user-images.githubusercontent.com/68722179/151045023-8ea94919-792d-4d8f-9de6-d9481ea8d0d8.png" />
+src 폴더 내에 common, components, utils 폴더를 만들었습니다.
+* common 폴더: 공통 컴포넌트로 사용 가능한 Grid 포함 (width, padding 등 여백이나 간격과 관련된 컴포넌트)
+* components 폴더: App.js에 렌더링할 2가지 계산기 컴포넌트
+* utils 폴더: 날짜 형식과 금액 형식(3자리마다 comma, 소수점 2자리 표시) 등 공통으로 쓰일 수 있는 함수 
+
 2. 선택한 CSS 작성 방법과 선택한 이유 
 - CSS-in-JS 라이브러리 중 하나인 styled components 구조로 진행하였습니다.
     
@@ -47,4 +52,10 @@ npm run start
     2) CSS 수정할 때마다 해당 컴포넌트 파일 위치를 찾아야 하는 번거로움이 있습니다.
     
 3. 팀의 Commit Message 템플릿과 그렇게 정한 이유
-- 
+팀 내 커밋 메시지의 일관성을 준수하는 것을 연습하기 위해 
+이번 과제의 경우는 예시로 제공된 템플릿을 사용하였습니다.
+- **Add** - 레이아웃 / 기능 추가
+- **Remove** - 내용 삭제 (폴더 / 파일 삭제)
+- **Modify** - 수정 (JSON 데이터 포맷 변경 / CSS 수정)
+- **Fix** - 버그/오류 해결
+- **Refactor** - 코드 리팩토링 (스스로 리팩토링 / 중복 코드 제거 / 불필요 코드 제거 / 성능 개선, merge)
