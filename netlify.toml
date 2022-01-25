@@ -1,5 +1,0 @@
-[[redirects]]
-  from = "/live?access_key=dd061ec34800c51169bb23adb343f890"
-  to = "https://api.currencylayer.com"
-  status = 200
-  force = true

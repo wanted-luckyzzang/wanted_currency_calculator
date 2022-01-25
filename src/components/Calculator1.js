@@ -30,7 +30,7 @@ const Calculator1 = () => {
       const currencyData = JSON.parse(data) || [];
       if (!localStorage.getItem('currency1')) {
         const getData = await axios.get(
-          `https://api.currencylayer.com/live?access_key=dd061ec34800c51169bb23adb343f890`,
+          `http://api.currencylayer.com/live?access_key=${process.env.REACT_APP_API_KEY}`,
         );
         currencyData.push(getData.data.quotes);
         localStorage.setItem('currency1', JSON.stringify(currencyData));
