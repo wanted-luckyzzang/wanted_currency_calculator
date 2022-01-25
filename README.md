@@ -18,7 +18,14 @@ npm run start
 
 ### ✨ 구현 화면
 
+<img src="https://user-images.githubusercontent.com/68722179/151030781-31eb3f39-95ea-4697-acb2-0dd782a40b6d.gif" width="600" />
 
+✅ 과제에 제시된 요구사항 모두 구현
+* 환율 계산 및 결과 렌더링
+* input 입력 시 실시간으로 ',' 찍기
+* 결과 금액에 ',' 추가 및 소수점 두번째 자리까지 표시
+* [1번째 계산기] - 로컬스토리지 추가
+* [2번째 계산기] - 첫 렌더링 시 첫번째 탭을 defalut로 선택, utils 함수 구현
 
 
 ### ✨ utils 함수
