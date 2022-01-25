@@ -40,7 +40,8 @@
       ],
       "arrow-body-style": 0,
       "react/function-component-definition": 0,
-      "react/button-has-type": 0
+      "react/button-has-type": 0,
+      "react/no-array-index-key": 0
     }
   },
   "browserslist": {
