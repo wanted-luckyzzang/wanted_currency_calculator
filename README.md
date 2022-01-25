@@ -16,6 +16,23 @@
 npm run start
 ```
 
+## 📁 디렉토리 구조
+```
+.
+├── App.js
+├── common              // 공통 컴포넌트로 사용 가능한 Grid 포함(width, padding 등 여백, 간격과 관련된 컴포넌트)
+│   └── Grid.js
+├── components          // App.js에 렌더링할 2가지 계산기 컴포넌트
+│   ├── Calculator1.js
+│   └── Calculator2.js
+├── index.js
+├── reset.css           // css 초기 설정
+├── setupTests.js
+└── utils               //날짜 형식과 금액 형식(3자리마다 comma, 소수점 2자리 표시) 등 공통으로 쓰일 수 있는 함수
+    ├── formatDate.js
+    └── formatMoney.js
+```
+
 ## ✨ 구현 영상
 
 <img src="https://user-images.githubusercontent.com/68722179/151032212-c40e493f-d6c5-4a49-b9b1-3c69a53b3533.gif" width="600" />
@@ -29,45 +46,3 @@ npm run start
 * [1번째 계산기] - 로컬스토리지
 * [2번째 계산기] - 첫 렌더링 시 첫번째 탭을 defalut로 선택, utils 함수 구현
 
-
-## 🚀 과제질문 3가지 답변
-
-#### 1. 프로젝트의 폴더 구조와 해당 구조의 장단점
-<img src="https://user-images.githubusercontent.com/68722179/151045023-8ea94919-792d-4d8f-9de6-d9481ea8d0d8.png" width="200" />
-<br/>
-
-src 폴더 내에 common, components, utils 폴더를 만들었습니다. <br/>
-
-▶ common 폴더: 공통 컴포넌트로 사용 가능한 Grid 포함 (width, padding 등 여백, 간격과 관련된 컴포넌트)<br/>
-▶ components 폴더: App.js에 렌더링할 2가지 계산기 컴포넌트<br/>
-▶ utils 폴더: 날짜 형식과 금액 형식(3자리마다 comma, 소수점 2자리 표시) 등 공통으로 쓰일 수 있는 함수 <br/>
-
-✅ 장점 :<br/>
-- 컴포넌트와 공통 함수를 모듈화하여 유지보수가 용이하다.<br/>
-
-✅ 단점 :<br/>
-- 파일을 import 해와서 적절한 인수를 넣어야 하는 번거로움이 있다.
-
-<br/>
-
-#### 2. 선택한 CSS 작성 방법과 선택한 이유 <br/>
-✅ CSS-in-JS 라이브러리 중 하나인 styled components 구조로 진행하였습니다.<br/><br/>
-✅ 장점 :<br/>
-    - props를 활용한 조건부 스타일링이 가능하다.<br/>
-    - 한 컴포넌트 내에서 css 코드를 함께 작업할 수 있다.<br/>
-    - 리액트 식의 컴포넌트 분리가 편해서 재사용성이 높다.<br/><br/>
-✅ 단점 :<br/>
-    - css를 줄 태그를 일일이 컴포넌트로 만들어야 한다.<br/>
-    - CSS 수정할 때마다 해당 컴포넌트 파일 위치를 찾아야 하는 번거로움이 있다.<br/>
-
-<br/>
-
-#### 3. 팀의 Commit Message 템플릿과 그렇게 정한 이유<br/>
-- 팀 내 커밋 메시지의 일관성을 준수하는 것을 연습하기 위해 
-이번 과제는 기존 템플릿을 그대로 사용하였습니다.<br/>
-
-**Add** - 레이아웃 / 기능 추가<br/>
-**Remove** - 내용 삭제 (폴더 / 파일 삭제)<br/>
-**Modify** - 수정 (JSON 데이터 포맷 변경 / CSS 수정)<br/>
-**Fix** - 버그/오류 해결<br/>
-**Refactor** - 코드 리팩토링 (스스로 리팩토링 / 중복 코드 제거 / 불필요 코드 제거 / 성능 개선, merge)
