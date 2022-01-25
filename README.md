@@ -35,7 +35,7 @@ npm run start
 1. 프로젝트의 폴더 구조와 해당 구조의 장단점
 <img src="https://user-images.githubusercontent.com/68722179/151045023-8ea94919-792d-4d8f-9de6-d9481ea8d0d8.png" width="200" />
 src 폴더 내에 common, components, utils 폴더를 만들었습니다. <br/>
-* common 폴더: 공통 컴포넌트로 사용 가능한 Grid 포함 (width, padding 등 여백이나 간격과 관련된 컴포넌트)<br/>
+* common 폴더: 공통 컴포넌트로 사용 가능한 Grid 포함 (width, padding 등 여백, 간격과 관련된 컴포넌트)<br/>
 * components 폴더: App.js에 렌더링할 2가지 계산기 컴포넌트<br/>
 * utils 폴더: 날짜 형식과 금액 형식(3자리마다 comma, 소수점 2자리 표시) 등 공통으로 쓰일 수 있는 함수 <br/>
 
