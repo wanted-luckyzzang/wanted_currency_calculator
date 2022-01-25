@@ -4,45 +4,31 @@ import { formatMoney } from '../utils/formatMoney';
 import formatDate from '../utils/formatDate';
 
 const Calculator2 = () => {
+  const [select, setSelect] = useState('USD');
+  const [dropdownItems, setDropdownItems] = useState([
+    'CAD',
+    'KRW',
+    'HKD',
+    'JPY',
+    'CNY',
+  ]);
+  const totalItems = ['USD', 'CAD', 'KRW', 'HKD', 'JPY', 'CNY'];
+  const updateSelect = (event) => {
+    setSelect(event.target.innerText);
+    setDropdownItems(totalItems.filter((e) => e !== event.target.innerText));
+  };
   const [isActive, setIsActive] = useState(false);
-  // const [item, setItem] = useState(null);
-
-  // const onActiveToggle = useCallback(() => {
-  //   setIsActive((prev) => !prev);
-  // }, []);
-
-  // const onSelectItem = useCallback((e) => {
-  //   const targetId = e.target.id;
-
-  //   if (targetId === 'item_name') {
-  //     setItem(e.target.parentElement.innertText);
-  //   } else if (targetId === 'item') {
-  //     setItem(e.target.innertText);
-  //   }
-
-  //   setIsActive((prev) => !prev);
-  // }, []);
-
-  // const dropdownItems = ['CAD', 'KRW', 'HKD', 'JPY', 'CNY'];
 
   return (
     <Container>
       <Header>
         <Input type="number" />
         <Dropdown>
-          {/* <option value="CAD">CAD</option>
-          <option value="KRW">KRW</option>
-          <option value="HKD">HKD</option>
-          <option value="JPY">JPY</option>
-          <option value="CNY">CNY</option>
-          <option value="USD">USD</option> */}
-          CAD
+          {select}
           <DropdownList>
-            <li>KRW</li>
-            <li>HKD</li>
-            <li>JPY</li>
-            <li>CNY</li>
-            <li>USD</li>
+            {dropdownItems.map((item) => {
+              return <button onClick={updateSelect}>{item}</button>;
+            })}
           </DropdownList>
         </Dropdown>
       </Header>
@@ -50,15 +36,11 @@ const Calculator2 = () => {
         <Tab
           onClick={() => {
             setIsActive(!isActive);
-            console.log(isActive);
           }}
         >
-          <li>CAD</li>
-          <li>KRW</li>
-          <li>HKD</li>
-          <li>JPY</li>
-          <li>CNY</li>
-          <li>USD</li>
+          {dropdownItems.map((item) => {
+            return <li>{item}</li>;
+          })}
         </Tab>
         <Result>
           <Money>{formatMoney('1000000')}</Money>
