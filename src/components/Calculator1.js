@@ -53,7 +53,7 @@ const Calculator1 = () => {
   const handleSelect = async (event) => {
     setReceiptCountry(event.target.value);
     try {
-      const getData = JSON.parse(localStorage.getItem('currency'))[0];
+      const getData = JSON.parse(localStorage.getItem('currency1'))[0];
       for (const value in getData) {
         if (value.slice(3) === event.target.value) {
           setCurrency(addCommaWithSeparator(roundToTwo(getData[value])));
