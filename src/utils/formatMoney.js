@@ -15,4 +15,10 @@ const roundToTwo = (num) => {
 const priceToNumber = (price) => {
   return Number(price.split(',').join(''));
 };
-export { addCommaWithSeparator, addCommaToMoney, roundToTwo, priceToNumber };
+
+const updateInputValue = (refEl, setState) => {
+  refEl.current.value = addCommaToMoney(refEl.current.value);
+  setState(refEl.current.value);
+};
+
+export { addCommaWithSeparator, roundToTwo, priceToNumber, updateInputValue };
