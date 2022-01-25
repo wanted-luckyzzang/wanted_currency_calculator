@@ -21,4 +21,20 @@ const updateInputValue = (refEl, setState) => {
   setState(refEl.current.value);
 };
 
-export { addCommaWithSeparator, roundToTwo, priceToNumber, updateInputValue };
+const limitInputValue = (refEl, setState) => {
+  const priceNumber = priceToNumber(refEl.current.value);
+  if (priceNumber > 1000) {
+    refEl.current.value = addCommaToMoney('1000');
+    setState(refEl.current.value);
+  } else {
+    refEl.current.value = addCommaToMoney(refEl.current.value);
+    setState(refEl.current.value);
+  }
+};
+export {
+  addCommaWithSeparator,
+  roundToTwo,
+  priceToNumber,
+  updateInputValue,
+  limitInputValue,
+};
