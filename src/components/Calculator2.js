@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 import { formatMoney, roundToTwo } from '../utils/formatMoney';
 import formatDate from '../utils/formatDate';
+import Grid from '../common/Grid';
 
 const Calculator2 = () => {
   const [select, setSelect] = useState('USD');
@@ -57,8 +58,14 @@ const Calculator2 = () => {
   }, []);
 
   return (
-    <Container>
-      <Header>
+    <Grid width="500px" padding="30px 30px" radius="24px" isFlex column>
+      <Grid
+        isFlex
+        justify="space-around"
+        height="120px"
+        radius="16px"
+        padding="20px 0"
+      >
         <Input type="number" onChange={handleInput} placeholder="0" />
         <Dropdown>
           {select}
@@ -72,8 +79,8 @@ const Calculator2 = () => {
             })}
           </DropdownList>
         </Dropdown>
-      </Header>
-      <Content>
+      </Grid>
+      <Grid height="400px" radius="16px" isFlex column>
         <Tab>
           {dropdownItems.map((item, idx) => {
             return (
@@ -83,38 +90,23 @@ const Calculator2 = () => {
             );
           })}
         </Tab>
-        <Result>
+        <Grid isFlex column justify="center" align="center" bg="transparent">
           <Money>
             {inputPrice !== 0
               ? formatMoney(roundToTwo(inputPrice * currency[select][tapIndex]))
               : 0}
           </Money>
           <Date>{formatDate(date * 1000)}</Date>
-        </Result>
-      </Content>
-    </Container>
+        </Grid>
+      </Grid>
+    </Grid>
   );
 };
-
-const Container = styled.div`
-  width: 500px;
-  height: auto;
-  padding: 30px 10px;
-  background: lightcyan;
-`;
-
-const Header = styled.div`
-  background: lightpink;
-  width: 100%;
-  height: 80px;
-  margin-bottom: 30px;
-  display: flex;
-  justify-content: space-between;
-`;
 
 const Input = styled.input`
   padding: 4px 12px;
   font-size: 20px;
+  border-radius: 16px;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
@@ -124,11 +116,21 @@ const Input = styled.input`
 
 const DropdownList = styled.ul`
   list-style: none;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  width: 50px;
 `;
 
 const Dropdown = styled.div`
-  width: 100px;
-  list-style: none;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 16px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
 
   & ul {
     list-style: none;
@@ -152,8 +154,9 @@ const Content = styled.div`
 `;
 
 const Tab = styled.ul`
-  background: lightblue;
+  height: 80px;
   display: flex;
+  justify-content: space-around;
   list-style: none;
   padding: 0;
 

@@ -41,6 +41,13 @@
       "arrow-body-style": 0,
       "react/function-component-definition": 0,
       "react/button-has-type": 0,
+      "no-unused-vars": 0,
+      "react/destructuring-assignment": 0,
+      "react/prop-types": 0,
+      "react/react-in-jsx-scope": 0,
+      "guard-for-in": 0,
+      "no-restricted-syntax": 0,
+      "react/jsx-props-no-spreading": 0,
       "react/no-array-index-key": 0
     }
   },
