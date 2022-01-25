@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
-// import { formatMoney } from '../utils/formatMoney';
+import { formatMoney, roundToTwo } from '../utils/formatMoney';
 import formatDate from '../utils/formatDate';
 
 const Calculator2 = () => {
@@ -17,7 +17,11 @@ const Calculator2 = () => {
   const [currency, setCurrency] = useState([]);
   const [date, setDate] = useState();
   const [index, setIndex] = useState(0);
+  const [inputPrice, setInputPrice] = useState(0);
 
+  const handleInput = (event) => {
+    setInputPrice(event.target.value);
+  };
   const totalItems = ['USD', 'CAD', 'KRW', 'HKD', 'JPY', 'CNY'];
   const updateSelect = (event) => {
     setSelect(event.target.innerText);
@@ -31,15 +35,8 @@ const Calculator2 = () => {
           ',',
         )}`,
       );
-
-      console.log(data);
-      console.log(data.timestamp);
-      console.log(Object.values(data.quotes));
-
       setCurrency(Object.values(data.quotes));
       setDate(data.timestamp);
-
-      console.log(currency);
     } catch (err) {
       console.log(err);
     }
@@ -52,7 +49,7 @@ const Calculator2 = () => {
   return (
     <Container>
       <Header>
-        <Input type="number" />
+        <Input type="number" onChange={handleInput} placeholder="0" />
         <Dropdown>
           {select}
           <DropdownList>
@@ -73,7 +70,7 @@ const Calculator2 = () => {
           })}
         </Tab>
         <Result>
-          <Money>{currency[index]}</Money>
+          <Money>{formatMoney(roundToTwo(inputPrice * currency[index]))}</Money>
           <Date>{formatDate(date * 1000)}</Date>
         </Result>
       </Content>
@@ -123,10 +120,6 @@ const Dropdown = styled.div`
   &:hover {
     ${DropdownList} {
       display: block;
-    }
-
-    ${DropdownList} li:hover {
-      background: lightgreen;
     }
   }
 `;
