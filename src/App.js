@@ -14,8 +14,9 @@ function App() {
 
 const Wrapper = styled.div`
   height: 100vh;
+  width: 100vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   background: url('img/background.jpg') no-repeat;
   background-size: cover;
