@@ -1,6 +1,6 @@
 import './reset.css';
 import styled from 'styled-components';
-import CalculatorOne from './components/CalculatorOne';
+import CalculatorOne from './components/Calculator1';
 import Calculator2 from './components/Calculator2';
 
 function App() {
