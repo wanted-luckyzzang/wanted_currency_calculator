@@ -1,9 +1,3 @@
-- 배포 주소
-- 과제 구현 목록
-    - [캐러셀 동작 예제](https://github.com/qhtjd2131/wanted_pre_onboarding)
-- 설치 및 시작하는 법
-
-
 # 환율 계산기 구현
 
 ## 배포 링크
