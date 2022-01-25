@@ -41,23 +41,18 @@ const Calculator2 = () => {
 
   const getApi = async () => {
     try {
-      if (!JSON.parse(localStorage.getItem('currency2'))) {
-        const { data } = await axios.get(
-          `http://api.currencylayer.com/live?access_key=dd061ec34800c51169bb23adb343f890&currencies=${dropdownItems.join(
-            ',',
-          )}`,
-        );
-        const currencyBase = [1, ...Object.values(data.quotes)];
-        const currencyList = {};
-        totalItems.forEach((e, idx) => {
-          currencyList[e] = getCurrencyRatio(idx, currencyBase);
-        });
-        setCurrency(currencyList);
-        setDate(data.timestamp);
-        localStorage.setItem('currency2', JSON.stringify(currencyList));
-      } else {
-        setCurrency(JSON.parse(localStorage.getItem('currency2')));
-      }
+      const { data } = await axios.get(
+        `http://api.currencylayer.com/live?access_key=dd061ec34800c51169bb23adb343f890&currencies=${dropdownItems.join(
+          ',',
+        )}`,
+      );
+      const currencyBase = [1, ...Object.values(data.quotes)];
+      const currencyList = {};
+      totalItems.forEach((e, idx) => {
+        currencyList[e] = getCurrencyRatio(idx, currencyBase);
+      });
+      setCurrency(currencyList);
+      setDate(data.timestamp);
     } catch (err) {
       console.log(err);
     }
