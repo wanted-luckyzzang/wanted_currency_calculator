@@ -18,7 +18,7 @@ npm run start
 
 ## ✨ 구현 화면
 
-<img src="https://user-images.githubusercontent.com/68722179/151030781-31eb3f39-95ea-4697-acb2-0dd782a40b6d.gif" width="600" />
+<img src="https://user-images.githubusercontent.com/68722179/151032212-c40e493f-d6c5-4a49-b9b1-3c69a53b3533.gif" width="600" />
 
 ✅ 과제에 제시된 요구사항 모두 구현
 * 환율 계산 및 결과 렌더링
