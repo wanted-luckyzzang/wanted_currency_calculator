@@ -136,7 +136,6 @@ const Input = styled.input`
   padding: 4px 12px;
   font-size: 20px;
   border-radius: 16px;
-
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -160,12 +159,10 @@ const Dropdown = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
-
   & ul {
     list-style: none;
     display: none;
   }
-
   &:hover {
     ${DropdownList} {
       display: block;
@@ -177,7 +174,6 @@ const ListItem = styled.button`
   width: 150px;
   height: 30px;
   background: rgba(255, 255, 255, 0.9);
-
   &:hover {
     background-image: linear-gradient(
       to top,
@@ -195,7 +191,6 @@ const Tab = styled.ul`
   justify-content: space-around;
   list-style: none;
   padding: 0;
-
   & li {
     border: 1px solid #8e8e8e;
     text-align: center;
@@ -207,7 +202,6 @@ const Tab = styled.ul`
 const TabItem = styled.button`
   width: 80px;
   border-radius: 8px;
-
   &:focus {
     /* border-bottom: 4px solid #8e8e8e; */
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
