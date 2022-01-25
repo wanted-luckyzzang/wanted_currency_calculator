@@ -1,70 +1,50 @@
-# Getting Started with Create React App
+# 환율 계산기 구현
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🥽 배포 링크
+<h2><a href='https://determined-volhard-ea03ee.netlify.app'>https://determined-volhard-ea03ee.netlify.app</a></h2>
 
-## Available Scripts
+## 🚩 노션 주소
+<h2><a href='https://www.notion.so/328d6ce7811640f1a02da6c57b8d995c'>https://www.notion.so/328d6ce7811640f1a02da6c57b8d995c</a></h2>
 
-In the project directory, you can run:
+## 🔮 역할 배분
+⚜ 박민주, 안병진 --- 1번째 계산기 구현<br/>
+⚜ 이지용, 윤예나 --- 2번째 계산기 구현<br/>
 
-### `npm start`
+## 🧶 설치 및 시작하는 법
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+npm run start
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## ✨ 구현 영상
 
-### `npm test`
+<img src="https://user-images.githubusercontent.com/68722179/151032212-c40e493f-d6c5-4a49-b9b1-3c69a53b3533.gif" width="600" />
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+✅ 과제에 제시된 요구사항 모두 구현
+* 환율 계산 및 결과 렌더링
+* input 입력 시 실시간으로 ',' 찍기
+* 결과 금액에 ',' 추가 및 소수점 두번째 자리까지 표시
+* [1번째 계산기] - 로컬스토리지 추가
+* [2번째 계산기] - 첫 렌더링 시 첫번째 탭을 defalut로 선택, utils 함수 구현
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🚀 과제질문 3가지 답변
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+1. 프로젝트의 폴더 구조와 해당 구조의 장단점
+- 
+2. 선택한 CSS 작성 방법과 선택한 이유 
+- CSS-in-JS 라이브러리 중 하나인 styled components 구조로 진행하였습니다.
+    
+    > CSS-in-JS이란? 스타일 정의를 CSS 나 SCSS 파일이 아닌
+    JavaScript로 작성된 컴포넌트에 바로 삽입하는 스타일 기법
+    
+- 장점 :
+    1)  props를 활용한 조건부 스타일링이 가능하며,
+    2) 해당 컴포넌트에 대해서의 스타일만을 정의하므로, 
+    스타일 적용범위가 한정적이라서 사이드 이펙트 확률이 줄어듭니다.
+- 단점 :
+    1) CSS 주고싶은 태그들을 다 컴포넌트를 제작해야 해야하고,
+    2) CSS 수정할 때마다 해당 컴포넌트 파일 위치를 찾아야 하는 번거로움이 있습니다.
+    
+3. 팀의 Commit Message 템플릿과 그렇게 정한 이유
+- 

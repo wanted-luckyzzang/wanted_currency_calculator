@@ -3,9 +3,9 @@ import styled, { css } from 'styled-components';
 import axios from 'axios';
 import {
   addCommaWithSeparator,
-  addCommaToMoney,
   roundToTwo,
   priceToNumber,
+  updateInputValue,
 } from '../utils/formatMoney';
 import formatDate from '../utils/formatDate';
 import Grid from '../common/Grid';
@@ -22,16 +22,12 @@ const Calculator2 = () => {
   const [currency, setCurrency] = useState([]);
   const [date, setDate] = useState();
   const [tabIndex, setTabIndex] = useState(0);
-  const [inputPrice, setInputPrice] = useState(0);
+  const [inputValue, setInputValue] = useState(0);
   const inputRef = useRef(null);
   const tabRef = useRef(null);
 
   const totalItems = ['USD', 'CAD', 'KRW', 'HKD', 'JPY', 'CNY'];
 
-  const updateInputValue = () => {
-    inputRef.current.value = addCommaToMoney(inputRef.current.value);
-    setInputPrice(inputRef.current.value);
-  };
   const updateSelect = (event) => {
     setSelect(event.target.innerText);
     setDropdownItems(totalItems.filter((e) => e !== event.target.innerText));
@@ -39,31 +35,36 @@ const Calculator2 = () => {
 
   const getCurrencyRatio = (idx, currencyBase) => {
     return currencyBase
-      .filter((e, idx2) => idx !== idx2)
+      .filter((e, index) => idx !== index)
       .map((e) => e / currencyBase[idx]);
   };
 
-  const getData = async () => {
+  const getApi = async () => {
     try {
-      const { data } = await axios.get(
-        `http://api.currencylayer.com/live?access_key=${
-          process.env.REACT_APP_ACCESS_KEY
-        }&currencies=${dropdownItems.join(',')}`,
-      );
-      const currencyBase = [1, ...Object.values(data.quotes)];
-      const currencyList = {};
-      totalItems.forEach((e, idx) => {
-        currencyList[e] = getCurrencyRatio(idx, currencyBase);
-      });
-      setCurrency(currencyList);
-      setDate(data.timestamp);
+      if (!JSON.parse(localStorage.getItem('currency2'))) {
+        const { data } = await axios.get(
+          `http://api.currencylayer.com/live?access_key=dd061ec34800c51169bb23adb343f890&currencies=${dropdownItems.join(
+            ',',
+          )}`,
+        );
+        const currencyBase = [1, ...Object.values(data.quotes)];
+        const currencyList = {};
+        totalItems.forEach((e, idx) => {
+          currencyList[e] = getCurrencyRatio(idx, currencyBase);
+        });
+        setCurrency(currencyList);
+        setDate(data.timestamp);
+        localStorage.setItem('currency2', JSON.stringify(currencyList));
+      } else {
+        setCurrency(JSON.parse(localStorage.getItem('currency2')));
+      }
     } catch (err) {
       console.log(err);
     }
   };
 
   useEffect(() => {
-    getData();
+    getApi();
     tabRef.current.firstChild.focus();
   }, []);
 
@@ -79,7 +80,7 @@ const Calculator2 = () => {
       >
         <Input
           type="text"
-          onChange={updateInputValue}
+          onChange={() => updateInputValue(inputRef, setInputValue)}
           placeholder="0"
           ref={inputRef}
         />
@@ -117,10 +118,10 @@ const Calculator2 = () => {
           radius="16px"
         >
           <Money>
-            {inputPrice !== 0
+            {inputValue !== 0
               ? addCommaWithSeparator(
                   roundToTwo(
-                    priceToNumber(inputPrice) * currency[select][tabIndex],
+                    priceToNumber(inputValue) * currency[select][tabIndex],
                   ),
                 )
               : 0}
