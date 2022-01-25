@@ -16,6 +16,8 @@ const Grid = (props) => {
     radius,
     none,
     children,
+    onSubmit,
+    checkComponent,
   } = props;
 
   const styles = {
@@ -32,7 +34,13 @@ const Grid = (props) => {
     radius,
   };
 
-  return <ElGrid {...styles}>{children}</ElGrid>;
+  return checkComponent === 'one' ? (
+    <ElWrapper {...styles} onSubmit={onSubmit}>
+      {children}
+    </ElWrapper>
+  ) : (
+    <ElGrid {...styles}>{children}</ElGrid>
+  );
 };
 
 Grid.defaultProps = {
@@ -45,7 +53,6 @@ Grid.defaultProps = {
   align: '',
   margin: '',
   padding: '',
-  // border: '1px solid #8e8e8e',
   radius: '',
 };
 
@@ -59,7 +66,19 @@ const ElGrid = styled.div`
   ${(props) => (props.column ? 'flex-direction: column;' : '')}
 	${(props) => `justify-content: ${props.justify};`};
   ${(props) => `align-items: ${props.align};`};
-  /* ${(props) => (props.border ? `border: ${props.border};` : '')}; */
+  ${(props) => (props.radius ? `border-radius: ${props.radius};` : '')}
+`;
+
+const ElWrapper = styled.form`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  ${(props) => (props.margin ? `margin: ${props.margin};` : '')}
+  ${(props) => (props.padding ? `padding: ${props.padding};` : '')}
+  ${(props) => (props.bg ? `background: ${props.bg};` : '')}
+  ${(props) => (props.isFlex ? 'display: flex;' : '')}
+  ${(props) => (props.column ? 'flex-direction: column;' : '')}
+	${(props) => `justify-content: ${props.justify};`};
+  ${(props) => `align-items: ${props.align};`};
   ${(props) => (props.radius ? `border-radius: ${props.radius};` : '')}
 `;
 
