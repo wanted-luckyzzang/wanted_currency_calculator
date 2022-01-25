@@ -1,7 +1,7 @@
 # 환율 계산기 구현
 
 ## 🥽 배포 링크
-<h2><a href='https://determined-volhard-ea03ee.netlify.app'>https://determined-volhard-ea03ee.netlify.app</a></h2>
+<h2><a href='http://currency-calculator.s3-website.ap-northeast-2.amazonaws.com/'>http://currency-calculator.s3-website.ap-northeast-2.amazonaws.com/</a></h2>
 
 ## 🚩 노션 주소
 <h2><a href='https://www.notion.so/328d6ce7811640f1a02da6c57b8d995c'>https://www.notion.so/328d6ce7811640f1a02da6c57b8d995c</a></h2>
