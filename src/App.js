@@ -1,9 +1,13 @@
 import React from 'react';
-// import logo from './logo.svg';
 import './App.css';
+import Test from './utils/Test';
 
 function App() {
-  return <div className="App">와우</div>;
+  return (
+    <div className="App">
+      <Test />
+    </div>
+  );
 }
 
 export default App;
