@@ -27,7 +27,6 @@ npm run start
 │   └── Calculator2.js
 ├── index.js
 ├── reset.css           // css 초기 설정
-├── setupTests.js
 └── utils               //날짜 형식과 금액 형식(3자리마다 comma, 소수점 2자리 표시) 등 공통으로 쓰일 수 있는 함수
     ├── formatDate.js
     └── formatMoney.js
