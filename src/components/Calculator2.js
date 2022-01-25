@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import axios from 'axios';
 import {
   addCommaWithSeparator,
@@ -24,6 +24,7 @@ const Calculator2 = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [inputPrice, setInputPrice] = useState(0);
   const inputRef = useRef(null);
+  const tabRef = useRef(null);
 
   const totalItems = ['USD', 'CAD', 'KRW', 'HKD', 'JPY', 'CNY'];
 
@@ -56,7 +57,6 @@ const Calculator2 = () => {
       });
       setCurrency(currencyList);
       setDate(data.timestamp);
-      console.log(currencyList);
     } catch (err) {
       console.log(err);
     }
@@ -64,6 +64,7 @@ const Calculator2 = () => {
 
   useEffect(() => {
     getData();
+    tabRef.current.firstChild.focus();
   }, []);
 
   return (
@@ -74,6 +75,7 @@ const Calculator2 = () => {
         height="120px"
         radius="16px"
         padding="20px 0"
+        margin="0 0 20px"
       >
         <Input
           type="text"
@@ -86,25 +88,34 @@ const Calculator2 = () => {
           <DropdownList>
             {dropdownItems.map((item, idx) => {
               return (
-                <button key={idx} onClick={updateSelect}>
+                <ListItem key={idx} onClick={updateSelect}>
                   {item}
-                </button>
+                </ListItem>
               );
             })}
           </DropdownList>
         </Dropdown>
       </Grid>
-      <Grid height="400px" radius="16px" isFlex column>
-        <Tab>
+      <Grid height="400px" radius="16px" isFlex column align="center">
+        <Tab ref={tabRef}>
           {dropdownItems.map((item, idx) => {
             return (
-              <button key={idx} onClick={() => setTabIndex(idx)}>
+              <TabItem key={idx} onClick={() => setTabIndex(idx)}>
                 {item}
-              </button>
+              </TabItem>
             );
           })}
         </Tab>
-        <Grid isFlex column justify="center" align="center" bg="transparent">
+        <Grid
+          width="80%"
+          height="240px"
+          isFlex
+          column
+          justify="center"
+          align="center"
+          bg="transparent"
+          radius="16px"
+        >
           <Money>
             {inputPrice !== 0
               ? addCommaWithSeparator(
@@ -138,6 +149,7 @@ const DropdownList = styled.ul`
   top: 80px;
   left: 0;
   width: 50px;
+  border-radius: 16px;
 `;
 
 const Dropdown = styled.div`
@@ -145,7 +157,6 @@ const Dropdown = styled.div`
   display: flex;
   flex-direction: column;
   background: #fff;
-  border-radius: 16px;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -162,13 +173,20 @@ const Dropdown = styled.div`
   }
 `;
 
-const Content = styled.div`
-  background: lightyellow;
-  width: 100%;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const ListItem = styled.button`
+  width: 150px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.9);
+
+  &:hover {
+    background-image: linear-gradient(
+      to top,
+      #f3e7e9 0%,
+      #e3eeff 99%,
+      #e3eeff 100%
+    );
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 0px 1px;
+  }
 `;
 
 const Tab = styled.ul`
@@ -186,9 +204,15 @@ const Tab = styled.ul`
   }
 `;
 
-const Result = styled.div`
-  height: 400px;
-  padding: 40px;
+const TabItem = styled.button`
+  width: 80px;
+  border-radius: 8px;
+
+  &:focus {
+    /* border-bottom: 4px solid #8e8e8e; */
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    /* background:  */
+  }
 `;
 
 const Money = styled.p`

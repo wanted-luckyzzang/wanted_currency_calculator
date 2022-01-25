@@ -61,6 +61,7 @@ const ElGrid = styled.div`
   ${(props) => `align-items: ${props.align};`};
   /* ${(props) => (props.border ? `border: ${props.border};` : '')}; */
   ${(props) => (props.radius ? `border-radius: ${props.radius};` : '')}
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 `;
 
 export default Grid;
