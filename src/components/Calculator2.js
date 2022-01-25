@@ -16,7 +16,7 @@ const Calculator2 = () => {
   ]);
   const [currency, setCurrency] = useState([]);
   const [date, setDate] = useState();
-  const [index, setIndex] = useState(0);
+  const [tapIndex, setTapIndex] = useState(0);
   const [inputPrice, setInputPrice] = useState(0);
 
   const handleInput = (event) => {
@@ -28,14 +28,25 @@ const Calculator2 = () => {
     setDropdownItems(totalItems.filter((e) => e !== event.target.innerText));
   };
 
+  const getCurrencyRatio = (idx, currencyBase) => {
+    return currencyBase
+      .filter((e, idx2) => idx !== idx2)
+      .map((e) => e / currencyBase[idx]);
+  };
+
   const getData = async () => {
     try {
       const { data } = await axios.get(
-        `http://api.currencylayer.com/live?access_key=dd061ec34800c51169bb23adb343f890&source=${select}&currencies=${dropdownItems.join(
-          ',',
-        )}`,
+        `http://api.currencylayer.com/live?access_key=${
+          process.env.REACT_APP_ACCESS_KEY
+        }&currencies=${dropdownItems.join(',')}`,
       );
-      setCurrency(Object.values(data.quotes));
+      const currencyBase = [1, ...Object.values(data.quotes)];
+      const currencyList = {};
+      totalItems.forEach((e, idx) => {
+        currencyList[e] = getCurrencyRatio(idx, currencyBase);
+      });
+      setCurrency(currencyList);
       setDate(data.timestamp);
     } catch (err) {
       console.log(err);
@@ -59,8 +70,12 @@ const Calculator2 = () => {
         <Dropdown>
           {select}
           <DropdownList>
-            {dropdownItems.map((item) => {
-              return <button onClick={updateSelect}>{item}</button>;
+            {dropdownItems.map((item, idx) => {
+              return (
+                <button key={idx} onClick={updateSelect}>
+                  {item}
+                </button>
+              );
             })}
           </DropdownList>
         </Dropdown>
@@ -68,11 +83,19 @@ const Calculator2 = () => {
       <Grid height="400px" radius="16px" isFlex column>
         <Tab>
           {dropdownItems.map((item, idx) => {
-            return <button onClick={() => setIndex(idx)}>{item}</button>;
+            return (
+              <button key={idx} onClick={() => setTapIndex(idx)}>
+                {item}
+              </button>
+            );
           })}
         </Tab>
         <Grid isFlex column justify="center" align="center" bg="transparent">
-          <Money>{formatMoney(roundToTwo(inputPrice * currency[index]))}</Money>
+          <Money>
+            {inputPrice !== 0
+              ? formatMoney(roundToTwo(inputPrice * currency[select][tapIndex]))
+              : 0}
+          </Money>
           <Date>{formatDate(date * 1000)}</Date>
         </Grid>
       </Grid>
