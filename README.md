@@ -49,6 +49,7 @@ src 폴더 내에 common, components, utils 폴더를 만들었습니다. <br/>
 - 파일을 import 해와서 적절한 인수를 넣어야 하는 번거로움이 있다.
 
 <br/>
+
 #### 2. 선택한 CSS 작성 방법과 선택한 이유 <br/>
 ✅ CSS-in-JS 라이브러리 중 하나인 styled components 구조로 진행하였습니다.<br/><br/>
 ✅ 장점 :<br/>
@@ -61,6 +62,7 @@ src 폴더 내에 common, components, utils 폴더를 만들었습니다. <br/>
 
 <br/>
 <br/>
+
 #### 3. 팀의 Commit Message 템플릿과 그렇게 정한 이유<br/>
 - 팀 내 커밋 메시지의 일관성을 준수하는 것을 연습하기 위해 
 이번 과제는 기존 템플릿을 그대로 사용하였습니다.<br/>
