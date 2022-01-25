@@ -19,10 +19,12 @@ const Calculator2 = () => {
   const [tapIndex, setTapIndex] = useState(0);
   const [inputPrice, setInputPrice] = useState(0);
 
+  const totalItems = ['USD', 'CAD', 'KRW', 'HKD', 'JPY', 'CNY'];
+
   const handleInput = (event) => {
     setInputPrice(event.target.value);
   };
-  const totalItems = ['USD', 'CAD', 'KRW', 'HKD', 'JPY', 'CNY'];
+
   const updateSelect = (event) => {
     setSelect(event.target.innerText);
     setDropdownItems(totalItems.filter((e) => e !== event.target.innerText));
@@ -66,7 +68,12 @@ const Calculator2 = () => {
         radius="16px"
         padding="20px 0"
       >
-        <Input type="number" onChange={handleInput} placeholder="0" />
+        <Input
+          type="number"
+          onChange={handleInput}
+          onKeyUp={formatMoney(inputPrice)}
+          placeholder="0"
+        />
         <Dropdown>
           {select}
           <DropdownList>
