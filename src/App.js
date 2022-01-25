@@ -1,12 +1,12 @@
 import './reset.css';
 import styled from 'styled-components';
-import CalculatorOne from './components/Calculator1';
+import Calculator1 from './components/Calculator1';
 import Calculator2 from './components/Calculator2';
 
 function App() {
   return (
     <Wrapper>
-      <CalculatorOne />
+      <Calculator1 />
       <Calculator2 />
     </Wrapper>
   );

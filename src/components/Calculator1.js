@@ -1,49 +1,59 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import axios from 'axios';
 import Grid from '../common/Grid';
-import { addCommaWithSeparator, roundToTwo } from '../utils/formatMoney';
+import {
+  addCommaWithSeparator,
+  roundToTwo,
+  priceToNumber,
+  updateInputValue,
+} from '../utils/formatMoney';
 
-const CalculatorOne = () => {
+const Calculator1 = () => {
   const [currency, setCurrency] = useState('');
   const [receiptCountry, setReceiptCountry] = useState('KRW');
   const [active, setActive] = useState(false);
   const [inputValue, setInputValue] = useState('');
 
+  const inputRef = useRef(null);
+
   const receiveable = addCommaWithSeparator(
     roundToTwo(
-      Number(inputValue) *
+      priceToNumber(inputValue) *
         Number(currency.includes(',') ? currency.replace(',', '') : currency),
     ),
   );
 
-  useEffect(async () => {
+  const getApi = async () => {
     try {
-      const data = localStorage.getItem('currency');
+      const data = localStorage.getItem('currency1');
       const currencyData = JSON.parse(data) || [];
-      if (!localStorage.getItem('currency')) {
+      if (!localStorage.getItem('currency1')) {
         const getData = await axios.get(
           `http://api.currencylayer.com/live?access_key=${process.env.REACT_APP_ACCESS_KEY}`,
         );
         currencyData.push(getData.data.quotes);
-        localStorage.setItem('currency', JSON.stringify(currencyData));
+        localStorage.setItem('currency1', JSON.stringify(currencyData));
       }
-      const getData = JSON.parse(localStorage.getItem('currency'))[0];
+      const getData = JSON.parse(localStorage.getItem('currency1'))[0];
       for (const index in getData) {
         if (index.slice(3) === 'KRW') {
           setCurrency(addCommaWithSeparator(roundToTwo(getData[index])));
         }
       }
     } catch (err) {
-      alert(err.message);
+      alert(err);
     }
+  };
+
+  useEffect(() => {
+    getApi();
   }, []);
 
   const handleSelect = async (event) => {
     setReceiptCountry(event.target.value);
     try {
       const getData = JSON.parse(localStorage.getItem('currency'))[0];
-      console.log(getData);
       for (const value in getData) {
         if (value.slice(3) === event.target.value) {
           setCurrency(addCommaWithSeparator(roundToTwo(getData[value])));
@@ -58,6 +68,7 @@ const CalculatorOne = () => {
     event.preventDefault();
     setInputValue(event.target[1].value);
     setActive(true);
+    updateInputValue(inputRef, setInputValue);
   };
 
   return (
@@ -86,12 +97,14 @@ const CalculatorOne = () => {
         </div>
         <div>
           <span>송금액: </span>
-          <Input type="text" />
+          <Input type="text" ref={inputRef} />
           <span> USD</span>
         </div>
         <Button>submit</Button>
         {active &&
-          (!inputValue || Number(receiveable) <= 0 || inputValue >= 10000 ? (
+          (!inputValue ||
+          Number(receiveable) <= 0 ||
+          priceToNumber(inputValue) >= 10000 ? (
             <div>
               <span style={{ color: 'red' }}>송금액이 바르지 않습니다</span>
             </div>
@@ -121,4 +134,4 @@ const Button = styled.button`
   border-radius: 5px;
 `;
 
-export default CalculatorOne;
+export default Calculator1;
