@@ -6,17 +6,17 @@
 ## 노션 주소
 <h2><a href='https://www.notion.so/328d6ce7811640f1a02da6c57b8d995c'>https://www.notion.so/328d6ce7811640f1a02da6c57b8d995c</a></h2>
 
-### 🔮 역할 배분
+## 🔮 역할 배분
 ⚜ 박민주, 안병진: 1번째 계산기 구현<br/>
 ⚜ 이지용, 윤예나: 2번째 계산기 구현<br/>
 
-### 🧶 설치 및 시작하는 법
+## 🧶 설치 및 시작하는 법
 
 ```
 npm run start
 ```
 
-### ✨ 구현 화면
+## ✨ 구현 화면
 
 <img src="https://user-images.githubusercontent.com/68722179/151030781-31eb3f39-95ea-4697-acb2-0dd782a40b6d.gif" width="600" />
 
@@ -28,6 +28,6 @@ npm run start
 * [2번째 계산기] - 첫 렌더링 시 첫번째 탭을 defalut로 선택, utils 함수 구현
 
 
-### ✨ utils 함수
+## ✨ utils 함수
 
 #### 
