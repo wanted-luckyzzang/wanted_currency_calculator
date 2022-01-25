@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import {
   addCommaWithSeparator,
   roundToTwo,
   priceToNumber,
-  updateInputValue,
+  limitInputValue,
 } from '../utils/formatMoney';
 import formatDate from '../utils/formatDate';
 import Grid from '../common/Grid';
@@ -24,7 +24,6 @@ const Calculator2 = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [inputValue, setInputValue] = useState(0);
   const inputRef = useRef(null);
-  const tabRef = useRef(null);
 
   const totalItems = ['USD', 'CAD', 'KRW', 'HKD', 'JPY', 'CNY'];
 
@@ -60,7 +59,6 @@ const Calculator2 = () => {
 
   useEffect(() => {
     getApi();
-    tabRef.current.firstChild.focus();
   }, []);
 
   return (
@@ -75,7 +73,7 @@ const Calculator2 = () => {
       >
         <Input
           type="text"
-          onChange={() => updateInputValue(inputRef, setInputValue)}
+          onChange={() => limitInputValue(inputRef, setInputValue)}
           placeholder="0"
           ref={inputRef}
         />
@@ -93,10 +91,14 @@ const Calculator2 = () => {
         </Dropdown>
       </Grid>
       <Grid height="400px" radius="16px" isFlex column align="center">
-        <Tab ref={tabRef}>
+        <Tab>
           {dropdownItems.map((item, idx) => {
             return (
-              <TabItem key={idx} onClick={() => setTabIndex(idx)}>
+              <TabItem
+                key={idx}
+                onClick={() => setTabIndex(idx)}
+                focus={idx === tabIndex}
+              >
                 {item}
               </TabItem>
             );
@@ -203,12 +205,7 @@ const Tab = styled.ul`
 const TabItem = styled.button`
   width: 80px;
   border-radius: 8px;
-
-  &:focus {
-    /* border-bottom: 4px solid #8e8e8e; */
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    /* background:  */
-  }
+  ${(props) => props.focus && ' box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;'};
 `;
 
 const Money = styled.p`
