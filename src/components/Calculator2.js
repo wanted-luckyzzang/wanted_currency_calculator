@@ -200,13 +200,7 @@ const Tab = styled.ul`
 const TabItem = styled.button`
   width: 80px;
   border-radius: 8px;
-<<<<<<< HEAD
-  /* &:focus {
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  } */
-=======
   ${(props) => props.focus && ' box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;'};
->>>>>>> master
 `;
 
 const Money = styled.p`
