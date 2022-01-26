@@ -30,7 +30,7 @@ const Calculator1 = () => {
       const currencyData = JSON.parse(data) || [];
       if (!localStorage.getItem('currency1')) {
         const getData = await axios.get(
-          `http://api.currencylayer.com/live?access_key=dd061ec34800c51169bb23adb343f890`,
+          `http://api.currencylayer.com/live?access_key=${process.env.REACT_APP_API_KEY}`,
         );
         currencyData.push(getData.data.quotes);
         localStorage.setItem('currency1', JSON.stringify(currencyData));
@@ -53,7 +53,7 @@ const Calculator1 = () => {
   const handleSelect = async (event) => {
     setReceiptCountry(event.target.value);
     try {
-      const getData = JSON.parse(localStorage.getItem('currency'))[0];
+      const getData = JSON.parse(localStorage.getItem('currency1'))[0];
       for (const value in getData) {
         if (value.slice(3) === event.target.value) {
           setCurrency(addCommaWithSeparator(roundToTwo(getData[value])));

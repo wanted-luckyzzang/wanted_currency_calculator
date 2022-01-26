@@ -5,7 +5,7 @@ import {
   addCommaWithSeparator,
   roundToTwo,
   priceToNumber,
-  updateInputValue,
+  limitInputValue,
 } from '../utils/formatMoney';
 import formatDate from '../utils/formatDate';
 import Grid from '../common/Grid';
@@ -24,7 +24,6 @@ const Calculator2 = () => {
   const [tabIndex, setTabIndex] = useState(0);
   const [inputValue, setInputValue] = useState(0);
   const inputRef = useRef(null);
-  const tabRef = useRef(null);
 
   const totalItems = ['USD', 'CAD', 'KRW', 'HKD', 'JPY', 'CNY'];
 
@@ -41,30 +40,18 @@ const Calculator2 = () => {
 
   const getApi = async () => {
     try {
-      // if (!JSON.parse(localStorage.getItem('currency2'))) {
       const { data } = await axios.get(
-        `http://api.currencylayer.com/live?access_key=dd061ec34800c51169bb23adb343f890&currencies=${dropdownItems.join(
-          ',',
-        )}`,
+        `http://api.currencylayer.com/live?access_key=${
+          process.env.REACT_APP_API_KEY
+        }&currencies=${dropdownItems.join(',')}`,
       );
-
-      console.log(data);
-
       const currencyBase = [1, ...Object.values(data.quotes)];
       const currencyList = {};
-
       totalItems.forEach((e, idx) => {
         currencyList[e] = getCurrencyRatio(idx, currencyBase);
       });
-
       setCurrency(currencyList);
       setDate(data.timestamp);
-      console.log(data.timestamp);
-
-      localStorage.setItem('currency2', JSON.stringify(currencyList));
-      // } else {
-      //   setCurrency(JSON.parse(localStorage.getItem('currency2')));
-      // }
     } catch (err) {
       console.log(err);
     }
@@ -72,7 +59,6 @@ const Calculator2 = () => {
 
   useEffect(() => {
     getApi();
-    tabRef.current.firstChild.focus();
   }, []);
 
   return (
@@ -87,7 +73,7 @@ const Calculator2 = () => {
       >
         <Input
           type="text"
-          onChange={() => updateInputValue(inputRef, setInputValue)}
+          onChange={() => limitInputValue(inputRef, setInputValue)}
           placeholder="0"
           ref={inputRef}
         />
@@ -105,10 +91,14 @@ const Calculator2 = () => {
         </Dropdown>
       </Grid>
       <Grid height="400px" radius="16px" isFlex column align="center">
-        <Tab ref={tabRef}>
+        <Tab>
           {dropdownItems.map((item, idx) => {
             return (
-              <TabItem key={idx} onClick={() => setTabIndex(idx)}>
+              <TabItem
+                key={idx}
+                onClick={() => setTabIndex(idx)}
+                focus={idx === tabIndex}
+              >
                 {item}
               </TabItem>
             );
@@ -210,9 +200,13 @@ const Tab = styled.ul`
 const TabItem = styled.button`
   width: 80px;
   border-radius: 8px;
+<<<<<<< HEAD
   /* &:focus {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   } */
+=======
+  ${(props) => props.focus && ' box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;'};
+>>>>>>> master
 `;
 
 const Money = styled.p`
