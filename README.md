@@ -1,12 +1,15 @@
 # 환율 계산기 구현
 
 ## 🥽 배포 링크
+
 <h2><a href='http://currency-calculator.s3-website.ap-northeast-2.amazonaws.com/'>http://currency-calculator.s3-website.ap-northeast-2.amazonaws.com/</a></h2>
 
 ## 🚩 노션 주소
+
 <h2><a href='https://www.notion.so/328d6ce7811640f1a02da6c57b8d995c'>https://www.notion.so/328d6ce7811640f1a02da6c57b8d995c</a></h2>
 
 ## 🔮 역할 배분
+
 ⚜ 박민주, 안병진 --- 1번째 계산기 구현<br/>
 ⚜ 이지용, 윤예나 --- 2번째 계산기 구현<br/>
 
@@ -17,6 +20,7 @@ npm run start
 ```
 
 ## 📁 디렉토리 구조
+
 ```
 .
 ├── App.js
@@ -33,14 +37,16 @@ npm run start
 ```
 
 ## ✨ 구현 영상
+
 ![gif1](https://user-images.githubusercontent.com/49055628/151074600-1af3d362-8d29-4d8c-b0f2-56f534fe44ae.gif)
 
 ### ✅ 과제에 제시된 요구사항 모두 구현
-* 환율 계산 및 결과 렌더링
-* input 입력 시 실시간으로 ',' 찍기
-* 결과 금액에 ',' 추가 및 소수점 두번째 자리까지 표시 <br/>
+
+- 환율 계산 및 결과 렌더링
+- input 입력 시 실시간으로 ',' 찍기
+- 결과 금액에 ',' 추가 및 소수점 두번째 자리까지 표시 <br/>
 
 ### ✅ 추가 구현사항
-* [1번째 계산기] - 로컬스토리지, 조건에 맞지 않는 값 입력 후 submit 버튼 클릭 시, 에러 메세지 송출.
-* [2번째 계산기] - 첫 렌더링 시 첫번째 탭을 defalut로 선택, utils 함수 구현
 
+- [1번째 계산기] - 로컬스토리지에 api 데이터를 저장하여 불필요한 요청 방지, 조건에 맞지 않는 값 입력 후 submit 버튼 클릭 시, 에러 메세지 송출.
+- [2번째 계산기] - 첫 렌더링 시 첫번째 탭을 defalut로 선택, utils 함수 구현
