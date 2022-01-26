@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import axios from 'axios';
 import {
   addCommaWithSeparator,
@@ -41,23 +41,30 @@ const Calculator2 = () => {
 
   const getApi = async () => {
     try {
-      if (!JSON.parse(localStorage.getItem('currency2'))) {
-        const { data } = await axios.get(
-          `http://api.currencylayer.com/live?access_key=dd061ec34800c51169bb23adb343f890&currencies=${dropdownItems.join(
-            ',',
-          )}`,
-        );
-        const currencyBase = [1, ...Object.values(data.quotes)];
-        const currencyList = {};
-        totalItems.forEach((e, idx) => {
-          currencyList[e] = getCurrencyRatio(idx, currencyBase);
-        });
-        setCurrency(currencyList);
-        setDate(data.timestamp);
-        localStorage.setItem('currency2', JSON.stringify(currencyList));
-      } else {
-        setCurrency(JSON.parse(localStorage.getItem('currency2')));
-      }
+      // if (!JSON.parse(localStorage.getItem('currency2'))) {
+      const { data } = await axios.get(
+        `http://api.currencylayer.com/live?access_key=dd061ec34800c51169bb23adb343f890&currencies=${dropdownItems.join(
+          ',',
+        )}`,
+      );
+
+      console.log(data);
+
+      const currencyBase = [1, ...Object.values(data.quotes)];
+      const currencyList = {};
+
+      totalItems.forEach((e, idx) => {
+        currencyList[e] = getCurrencyRatio(idx, currencyBase);
+      });
+
+      setCurrency(currencyList);
+      setDate(data.timestamp);
+      console.log(data.timestamp);
+
+      localStorage.setItem('currency2', JSON.stringify(currencyList));
+      // } else {
+      //   setCurrency(JSON.parse(localStorage.getItem('currency2')));
+      // }
     } catch (err) {
       console.log(err);
     }
@@ -203,11 +210,9 @@ const Tab = styled.ul`
 const TabItem = styled.button`
   width: 80px;
   border-radius: 8px;
-  &:focus {
-    /* border-bottom: 4px solid #8e8e8e; */
+  /* &:focus {
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    /* background:  */
-  }
+  } */
 `;
 
 const Money = styled.p`

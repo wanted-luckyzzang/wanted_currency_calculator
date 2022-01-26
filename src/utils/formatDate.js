@@ -15,6 +15,7 @@ const formatDate = (timestamp) => {
   ];
 
   const today = new Date(timestamp);
+  console.log(timestamp);
 
   const year = today.getFullYear();
   const month = monthArr[today.getMonth()]; // 1월은 0으로 표현됨 (0~11)
